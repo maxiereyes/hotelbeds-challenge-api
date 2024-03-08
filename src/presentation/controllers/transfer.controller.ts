@@ -4,6 +4,7 @@ import { AxiosError } from "axios";
 import { TransferRepository } from "../../domain/repositories";
 import { TransferQueryDto } from "../../domain/dtos";
 import { FromToTypeEnum } from "../../domain/enums/transfer/fromToType.enum";
+import { CreateBookingDto } from "../../domain/dtos/transfer/create-booking.dto";
 
 
 export class TransferController {
@@ -12,7 +13,7 @@ export class TransferController {
     ) { }
 
     private handleError = (error: unknown, res: Response) => {
-        if (error instanceof AxiosError) return res.status(error?.response?.status || 500).json({errorResponse: error?.response?.statusText || 'Unknown error', errorData: error?.response?.data.error})
+        if (error instanceof AxiosError) return res.status(error?.response?.status || 500).json({errorResponse: error?.response?.statusText || 'Unknown error', errorData: error?.response?.data.error || error?.response?.data.message})
         if (error instanceof CustomError) return res.status(error?.statusCode).json({error: error?.message})
         
         return res.status(500).json({error: 'Unknown error'})
@@ -26,6 +27,17 @@ export class TransferController {
         this.transferRepository
             .getAvailability(transferQueryDto!)
             .then(availability => res.status(200).json(availability))
+            .catch(error => this.handleError(error, res))
+    }
+
+    public createBooking = (req: Request, res: Response) => {
+        const {language = 'es', holder = {}, transfers = [], clientReference = '', remark = ''} = req.body
+        const [error, createBookingDto] = CreateBookingDto.create({language, holder, transfers, clientReference, remark})
+        if (error) return res.status(400).json({error})
+
+        this.transferRepository
+            .createBooking(createBookingDto!)
+            .then(booking => res.status(200).json(booking))
             .catch(error => this.handleError(error, res))
     }
 }

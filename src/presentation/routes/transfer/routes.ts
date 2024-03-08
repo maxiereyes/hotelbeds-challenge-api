@@ -13,6 +13,7 @@ export class TransferRoutes {
         const transferController = new TransferController(transferRepositoryImple)
 
         router.get('/availability', transferController.getAvailability)
+        router.post('/bookings', transferController.createBooking)
 
         return router
     }

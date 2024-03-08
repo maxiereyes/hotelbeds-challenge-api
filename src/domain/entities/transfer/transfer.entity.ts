@@ -78,18 +78,14 @@ export class TransferEntity {
                     readonly name: string
                 },
                 readonly images: {
-                    readonly image: {
-                        readonly url: string,
-                        readonly type: string
-                    }
+                    readonly url: string,
+                    readonly type: string
                 }[],
                 readonly transferDetailInfos: {
-                    readonly transferDetailInfo: {
-                        readonly id: string,
-                        readonly name: string,
-                        readonly description: string,
-                        readonly type: string
-                    }
+                    readonly id: string,
+                    readonly name: string,
+                    readonly description: string,
+                    readonly type: string
                 }[],
                 readonly customerTransferTimeInfo: string,
                 readonly supplierTransferTimeInfo: string
@@ -100,17 +96,13 @@ export class TransferEntity {
             },
             readonly rateKey: string,
             readonly cancellationPolicies: {
-                readonly cancellationPolicy: {
-                    readonly amount: number,
-                    readonly from: string,
-                    readonly currencyId: string
-                }
+                readonly amount: number,
+                readonly from: string,
+                readonly currencyId: string
             }[],
             readonly links: {
-                readonly link: {
-                    readonly rel: string,
-                    readonly href: string
-                }
+                readonly rel: string,
+                readonly href: string
             }[],
             readonly factsheetId: number;
         }[]
