@@ -7,7 +7,7 @@ export class CommonQueryDto {
         public readonly language: string
     ){}
 
-    static create(offset: number = 0, limit: number = 10, countryCodes: string = '', destinationCodes: string = '', language: string = 'es'): [string?, CommonQueryDto?] {
+    static create(offset: number, limit: number, countryCodes: string = '', destinationCodes: string = '', language: string = 'es'): [string?, CommonQueryDto?] {
         if (isNaN(offset) || isNaN(limit)) return ['Offset and limit must be numbers']
         if (isNaN(limit) || limit < 1) return ['Limit must be greater than 0']
 

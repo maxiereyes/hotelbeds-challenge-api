@@ -22,15 +22,15 @@ export class AxiosAdapter implements HttpService {
 
         this.axiosInstance.defaults.headers.common = {
             'X-Signature': signatureHash,
-            'Api-key': apiKey,
+            'Api-key': apiKey
         }
     }
 
     async get<T>(url: string): Promise<HttpResponse<T>> {
         const response: AxiosResponse<T> = await this.axiosInstance.get<T>(url)   
         return {
-            data: response.data,
-            status: response.status
+            data: response?.data,
+            status: response?.status
         }
     }
 

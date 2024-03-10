@@ -1,7 +1,7 @@
 import { HttpService } from "../../domain/adapters/http.adapter";
 import { CommonDataSource } from "../../domain/datasources";
 import { CommonQueryDto } from "../../domain/dtos";
-import { DestinationEntity, HotelEntity, TerminalEntity } from "../../domain/entities";
+import { CountryEntity, DestinationEntity, HotelEntity, TerminalEntity } from "../../domain/entities";
 import { AxiosAdapter } from "../adapters/axios.adapter";
 
 export class CommonImplementationDatasource implements CommonDataSource {
@@ -30,5 +30,12 @@ export class CommonImplementationDatasource implements CommonDataSource {
         const response = await this.httpService.get<any[]>(`/transfer-cache-api/1.0/locations/destinations?fields=ALL&language=${language}&countryCodes=${countryCodes}&limit=${limit}&offset=${offset}`)
         const destinations = response.data.map(destination => DestinationEntity.fromObject(destination))
         return destinations
+    }
+
+    async getCountries(commonQueryDto: CommonQueryDto): Promise<CountryEntity[]> {
+        const {language} = commonQueryDto
+        const response = await this.httpService.get<any[]>(`/transfer-cache-api/1.0/locations/countries?fields=ALL&language=${language}`)
+        const countries = response.data.map(country => CountryEntity.fromObject(country))
+        return countries
     }
 }

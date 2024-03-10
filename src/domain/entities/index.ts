@@ -3,3 +3,6 @@ export * from './terminal.entity';
 export * from './destination.entity';
 export * from './transfer/transfer.entity';
 export * from './transfer/booking.entity';
+export * from './country.entity';
+
+

@@ -15,6 +15,7 @@ export class CommonRoutes {
         router.get('/hotels', commonController.getHotels)
         router.get('/terminals', commonController.getTerminals)
         router.get('/destinations', commonController.getDestinations)
+        router.get('/countries', commonController.getCountries)
 
         return router
     }

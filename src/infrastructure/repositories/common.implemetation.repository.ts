@@ -1,6 +1,6 @@
 import { CommonDataSource } from "../../domain/datasources";
 import { CommonQueryDto } from "../../domain/dtos";
-import { DestinationEntity, HotelEntity, TerminalEntity } from "../../domain/entities";
+import { CountryEntity, DestinationEntity, HotelEntity, TerminalEntity } from "../../domain/entities";
 import { CommonRepository } from "../../domain/repositories";
 
 export class CommonImplementationRepository implements CommonRepository {
@@ -18,5 +18,9 @@ export class CommonImplementationRepository implements CommonRepository {
 
     async getDestinations(commonQueryDto: CommonQueryDto): Promise<DestinationEntity[]> {
         return await this.commonDatasource.getDestinations(commonQueryDto)
+    }
+
+    async getCountries(commonQueryDto: CommonQueryDto): Promise<CountryEntity[]> {
+        return await this.commonDatasource.getCountries(commonQueryDto)
     }
 }

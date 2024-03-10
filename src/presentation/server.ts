@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import cors from 'cors'
 
 interface ServerOptions {
     port: number;
@@ -22,7 +23,8 @@ export class Server {
     }
 
     async start() {
-        
+        this.app.use(cors())
+
         // Middlewares
         this.app.use(express.json()) // raw
         this.app.use(express.urlencoded({ extended: true })) // xwww-form-urlencoded
@@ -30,7 +32,7 @@ export class Server {
         // Routes
         this.app.use(this.routes)
 
-        this.serverListener = this.app.listen(this.port, () => console.log(`Server running on port ${this.port}`));
+        this.serverListener = this.app.listen(this.port, () => console.log(`CORS-enabled server running on port ${this.port}`));
     }
 
     public close() {
